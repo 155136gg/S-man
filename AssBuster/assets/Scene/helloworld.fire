@@ -77,15 +77,18 @@
       },
       {
         "__id__": 8
+      },
+      {
+        "__id__": 11
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 11
+        "__id__": 14
       },
       {
-        "__id__": 12
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -176,7 +179,7 @@
       "array": [
         0,
         0,
-        358.54804881369176,
+        233.82685902179844,
         0,
         0,
         0,
@@ -389,8 +392,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 195,
-      "height": 270
+      "width": 40,
+      "height": 40
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -401,16 +404,16 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        0,
-        0,
+        -5.954,
+        -190.511,
         0,
         0,
         0,
         0,
         1,
-        1,
-        1,
-        1
+        1.884,
+        1.884,
+        1.884
       ]
     },
     "_eulerAngles": {
@@ -442,7 +445,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "31bc895a-c003-4566-a9f3-2e54ae1c17dc"
+      "__uuid__": "bde766c3-70f4-48e0-8807-c3d7184e5375"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -466,13 +469,119 @@
       "__id__": 8
     },
     "_enabled": true,
-    "label": null,
-    "text": "Hello, World!",
-    "jumpHight": 150,
+    "jumpHight": 0,
     "jumpDuration": 0.3,
     "maxMoveSpeed": 400,
     "accel": 1000,
     "_id": "92oWDkM+xGR71PMJgZ1TrM"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "enemy",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 12
+      },
+      {
+        "__id__": 13
+      }
+    ],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 32,
+      "height": 32
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        -0.744,
+        233.675,
+        0,
+        0,
+        0,
+        0,
+        1,
+        2.587,
+        2.587,
+        2.587
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "04CP3wkxpEKbSLPzKNcRRh"
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 11
+    },
+    "_enabled": true,
+    "_materials": [
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
+    ],
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_spriteFrame": {
+      "__uuid__": "71f51002-a17d-422f-859e-482420d52745"
+    },
+    "_type": 0,
+    "_sizeMode": 1,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_atlas": null,
+    "_id": "b6wiUZlVlE0rdrEhuornOi"
+  },
+  {
+    "__type__": "cfe3bzRCgxIJ7tCN1mJN6bH",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 11
+    },
+    "_enabled": true,
+    "moveSpeed": 0,
+    "_id": "dfiRSXoTRBYZGRaoin3cpK"
   },
   {
     "__type__": "cc.Canvas",

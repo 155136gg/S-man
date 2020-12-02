@@ -2,12 +2,12 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        label: {
+        /*label: {
             default: null,
             type: cc.Label
         },
         // defaults, set visually when attaching this script to the Canvas
-        text: 'Hello, World!',
+        text: 'Hello, World!',*/
 		jumpHight:0,
         jumpDuration:0,
 		maxMoveSpeed:0,
