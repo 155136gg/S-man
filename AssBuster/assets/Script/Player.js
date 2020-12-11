@@ -54,6 +54,14 @@ cc.Class({
                 break;
         }
     },
+
+    setblinkSec: function( sec ){
+        if( this.blinkframe == 0 ){
+            console.log("blink start!");
+            this.blinkframe = sec * 60;
+            this.blinkcount = 0;
+        }
+    },
     // use this for initialization
     onLoad: function () {
 
@@ -69,6 +77,10 @@ cc.Class({
         // 初始化键盘输入监听
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this); 
+    },
+
+    start(){
+        this.blinkframe = 0;
     },
 
     // called every frame
@@ -89,6 +101,19 @@ cc.Class({
 
         // 根据当前速度更新主角的位置
         this.node.x += this.xSpeed * dt;
+
+        // If need blink
+        if( this.blinkframe > 0 ){
+            if( this.blinkcount % 60 < 30 ){
+                this.node.opacity = 0;
+            } else {
+                this.node.opacity = 255;
+            }
+            this.blinkcount++;
+            if( this.blinkcount == this.blinkframe ){
+                this.blinkframe = 0;
+            }
+        }
     },
 
     onDestroy () {

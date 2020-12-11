@@ -117,7 +117,7 @@
     },
     "_enabled": true,
     "pickupRadius": 60,
-    "fallSpeed": 2,
+    "fallSpeed": 4,
     "_id": ""
   },
   {

@@ -36,7 +36,11 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        bulletCreatePeriod:0
+        hp:{//TODO
+            default: null,
+            type: cc.Node
+        },
+        bulletCreatePeriod:0,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -44,6 +48,7 @@ cc.Class({
         //this.spawnNewBullet();
         this.bulletPool = new cc.NodePool();
         this.bulletCreateCount = 0;
+        this.enemy.getComponent('Enemy').main = this;
     },
 
     start () {
@@ -51,14 +56,14 @@ cc.Class({
 
     update (dt) {
         if( this.bulletCreateCount == this.bulletCreatePeriod){
-            this.createEnemy();
+            this.createBullet();
             this.bulletCreateCount = 0;
         } else {
             this.bulletCreateCount++;
         }
     },
 
-    createEnemy: function () {
+    createBullet: function () {
         let bullet = null;
         if (this.bulletPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
             console.log("reuse bullet");
@@ -75,7 +80,10 @@ cc.Class({
 
     getNewBulletPosition: function () {
         // 返回星星坐标
-        console.log("x:"+this.enemy.x + " h:" + this.enemy.height);
         return cc.v2(this.enemy.x, this.enemy.y - this.enemy.height);
     },
+
+    changePlayerHp: function(){
+        this.player.getComponent("Player").setblinkSec(3);
+    }
 });

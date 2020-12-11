@@ -38,9 +38,28 @@ cc.Class({
 
     update (dt) {
         this.node.y -= this.fallSpeed;
+        if (this.getPlayerDistance() < this.pickupRadius) {
+            // 调用收集行为
+            this.onHit();
+        }
         if( this.node.y <= -0.5*this.main.node.height){
             console.log("into pool");
             this.main.bulletPool.put(this.node);
         }
     },
+
+    onHit: function() {
+        // 当星星被收集时，调用 Game 脚本中的接口，生成一个新的星星
+        this.main.changePlayerHp();
+        // 然后销毁当前星星节点
+        this.main.bulletPool.put(this.node);
+    },
+
+    getPlayerDistance: function () {
+        // 根据 Player 节点位置判断距离
+        var playerPos = this.main.player.getPosition();
+        // 根据两点位置计算两点之间距离
+        var dist = this.node.position.sub(playerPos).mag();
+        return dist;
+    }
 });

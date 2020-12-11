@@ -24,19 +24,26 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        moveSpeed:0
+        moveSpeed:0,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        this.directionType = {
+            LEFT:-1, RIGHT:1
+        }
+        this.direction = this.directionType.RIGHT * this.moveSpeed;
     },
 
     start () {
-
+        this.borderWidth = this.main.node.width/2 - this.node.width;
     },
 
     update (dt) {
-
+        this.node.x += this.direction;
+        if( Math.abs(this.node.x) >= this.borderWidth ){
+            this.direction *= -1;
+        }
     },
 });
