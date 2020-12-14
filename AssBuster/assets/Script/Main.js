@@ -85,5 +85,11 @@ cc.Class({
 
     changePlayerHp: function(){
         this.player.getComponent("Player").setblinkSec(3);
+        let hp = this.hp.getComponent(cc.ProgressBar);
+        hp.progress -= 0.3;
+        if( hp.progress <= 0 ){
+            //TODO 
+            cc.director.loadScene("end");
+        }
     }
 });
