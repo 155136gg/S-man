@@ -27,6 +27,14 @@ cc.Class({
         moveSpeed:0,
     },
 
+
+    setblinkSec: function( sec ){
+        if( this.blinkframe == 0 ){
+            this.nodamageFlag = true;
+            this.blinkframe = sec * 60;
+            this.blinkcount = 0;
+        }
+    },
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
@@ -34,6 +42,8 @@ cc.Class({
             LEFT:-1, RIGHT:1
         }
         this.direction = this.directionType.RIGHT * this.moveSpeed;
+        this.nodamageFlag = false;
+        this.blinkframe = 0;
     },
 
     start () {
@@ -44,6 +54,20 @@ cc.Class({
         this.node.x += this.direction;
         if( Math.abs(this.node.x) >= this.borderWidth ){
             this.direction *= -1;
+        }
+
+        // If need blink
+        if( this.blinkframe > 0 ){
+            if( this.blinkcount %  30 < 15 ){
+                this.node.opacity = 0;
+            } else {
+                this.node.opacity = 255;
+            }
+            this.blinkcount++;
+            if( this.blinkcount == this.blinkframe ){
+                this.blinkframe = 0;
+                this.nodamageFlag = false;
+            }
         }
     },
 });

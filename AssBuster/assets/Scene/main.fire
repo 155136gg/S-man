@@ -478,7 +478,7 @@
       "__id__": 8
     },
     "_enabled": true,
-    "jumpHight": 0,
+    "jumpHight": 400,
     "jumpDuration": 0.3,
     "maxMoveSpeed": 400,
     "accel": 1000,
@@ -589,7 +589,7 @@
       "__id__": 11
     },
     "_enabled": true,
-    "moveSpeed": 0,
+    "moveSpeed": 10,
     "_id": "dfiRSXoTRBYZGRaoin3cpK"
   },
   {
@@ -1077,10 +1077,15 @@
     "enemy": {
       "__id__": 11
     },
-    "hp": {
+    "playerHp": {
       "__id__": 14
     },
-    "bulletCreatePeriod": 100,
+    "enemyHp": {
+      "__id__": 19
+    },
+    "bulletCreatePeriod": 60,
+    "enemyHitDistance": 50,
+    "enemyCriticalHitDistance": 20,
     "_id": "4ah4PLa9RGXo4Mlc67z1Vn"
   }
 ]

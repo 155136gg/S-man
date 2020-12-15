@@ -5,6 +5,10 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
+window.Global = {
+    endIndex: 0
+};
+
 cc.Class({
     extends: cc.Component,
 
@@ -36,11 +40,17 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        hp:{//TODO
+        playerHp:{//TODO
+            default: null,
+            type: cc.Node
+        },
+        enemyHp:{//TODO
             default: null,
             type: cc.Node
         },
         bulletCreatePeriod:0,
+        enemyHitDistance:0,
+        enemyCriticalHitDistance:0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -61,21 +71,27 @@ cc.Class({
         } else {
             this.bulletCreateCount++;
         }
+
+        // 根据 Player 节点位置判断距离
+        var playerPos = this.player.getPosition();
+        // 根据两点位置计算两点之间距离
+        var dist = this.enemy.getPosition().sub(playerPos).mag();
+        if ( dist < this.enemyHitDistance ) {
+            var delX = Math.abs(this.enemy.x - this.player.x);
+            this.changeEnemyHp(delX);
+        }
     },
 
     createBullet: function () {
         let bullet = null;
         if (this.bulletPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-            console.log("reuse bullet");
             bullet = this.bulletPool.get();
         } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-            console.log("create bullet");
             bullet = cc.instantiate(this.bullet);
             bullet.getComponent('Bullet').main = this;
         }
         bullet.parent = this.node; // 将生成的敌人加入节点树
         bullet.setPosition(this.getNewBulletPosition());
-        //bullet.getComponent('Enemy').init(); //接下来就可以调用 enemy 身上的脚本进行初始化
     },
 
     getNewBulletPosition: function () {
@@ -84,12 +100,25 @@ cc.Class({
     },
 
     changePlayerHp: function(){
-        this.player.getComponent("Player").setblinkSec(3);
-        let hp = this.hp.getComponent(cc.ProgressBar);
-        hp.progress -= 0.3;
-        if( hp.progress <= 0 ){
-            //TODO 
-            cc.director.loadScene("end");
+        if( !this.player.getComponent("Player").nodamageFlag ){
+            this.player.getComponent("Player").setblinkSec(3);
+            let bar = this.playerHp.getComponent(cc.ProgressBar);
+            bar.progress -= 0.3;
+            if( bar.progress <= 0 ){
+                cc.director.loadScene("end");
+            }
+        }
+    },
+
+    changeEnemyHp: function(delX){
+        if( !this.enemy.getComponent("Enemy").nodamageFlag ){
+            this.enemy.getComponent("Enemy").setblinkSec(3);
+            let bar = this.enemyHp.getComponent(cc.ProgressBar);
+            bar.progress -= 0.3 * (delX < this.enemyCriticalHitDistance ? 1:0.5);
+            if( bar.progress <= 0 ){
+                Global.endIndex = 1;
+                cc.director.loadScene("end");
+            }
         }
     }
 });

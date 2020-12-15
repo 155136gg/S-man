@@ -58,6 +58,7 @@ cc.Class({
         this.testStory = ["abc","def","ghi"];
         this.myTextWindow.getComponent("TextWindow").setContentText(this.testStory[0]);
         this.storyIndex = 1;
+        cc.log("End is : " + Global.endIndex);
     },
 
     // update (dt) {},

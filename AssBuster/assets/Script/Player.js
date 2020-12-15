@@ -25,12 +25,15 @@ cc.Class({
         // set a flag when key pressed
         switch(event.keyCode) {
             case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
                 this.accLeft = true;
                 break;
             case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
                 this.accRight = true;
                 break;
             case cc.macro.KEY.enter:
+            case cc.macro.KEY.space:
                 if( !this.jumpFlag ){
                     cc.tween(this.node)
                     .call(() => { this.jumpFlag = true; })
@@ -47,9 +50,11 @@ cc.Class({
         // unset a flag when key released
         switch(event.keyCode) {
             case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
                 this.accLeft = false;
                 break;
             case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
                 this.accRight = false;
                 break;
         }
@@ -57,7 +62,7 @@ cc.Class({
 
     setblinkSec: function( sec ){
         if( this.blinkframe == 0 ){
-            console.log("blink start!");
+            this.nodamageFlag = true;
             this.blinkframe = sec * 60;
             this.blinkcount = 0;
         }
@@ -76,11 +81,13 @@ cc.Class({
 
         // 初始化键盘输入监听
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this); 
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
+        this.nodamageFlag = false;
+        this.blinkframe = 0;
     },
 
     start(){
-        this.blinkframe = 0;
     },
 
     // called every frame
@@ -112,6 +119,7 @@ cc.Class({
             this.blinkcount++;
             if( this.blinkcount == this.blinkframe ){
                 this.blinkframe = 0;
+                this.nodamageFlag = false;
             }
         }
     },
