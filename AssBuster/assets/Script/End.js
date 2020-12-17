@@ -30,34 +30,16 @@ cc.Class({
         }
     },
 
-    onKeyDown (event) {
-        // set a flag when key pressed
-        switch(event.keyCode) {
-            case cc.macro.KEY.enter:
-            case cc.macro.KEY.space:
-                if( this.storyIndex < this.testStory.length ){
-                    this.myTextWindow.getComponent("TextWindow").setContentText(this.testStory[this.storyIndex]);
-                    this.storyIndex++;
-                } else {
-                    cc.director.loadScene("start");
-                }
-                break;
-        }
-    },
-
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        // 初始化键盘输入监听
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
 
     start () {
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
         this.testStory = ["abc","def","ghi"];
-        this.myTextWindow.getComponent("TextWindow").setContentText(this.testStory[0]);
-        this.storyIndex = 1;
+        this.myTextWindow.getComponent("TextWindow").setup(this.testStory, () => {cc.director.loadScene("start");});
         cc.log("End is : " + Global.endIndex);
     },
 

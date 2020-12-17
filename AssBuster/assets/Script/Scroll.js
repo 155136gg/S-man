@@ -24,10 +24,8 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-    },
-
-    onStartClick(){
-        cc.director.loadScene("intro");
+        scrollSpeed:0,
+        resetY: 0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -38,5 +36,13 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        cc.log(dt);
+        var y = this.node.y;
+        y -= this.scrollSpeed;
+        if (y <= this.resetY) {
+            y -= this.resetY;
+        }
+        this.node.y = y;
+    },
 });

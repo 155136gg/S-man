@@ -32,6 +32,7 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        bulletCreatePeriod:0,
         player:{
             default: null,
             type: cc.Node
@@ -44,11 +45,12 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        playerDmgRate:0,
         enemyHp:{//TODO
             default: null,
             type: cc.Node
         },
-        bulletCreatePeriod:0,
+        enemyDmgRate:0,
         enemyHitDistance:0,
         enemyCriticalHitDistance:0
     },
@@ -62,6 +64,7 @@ cc.Class({
     },
 
     start () {
+        this.powerUpFlag = false;
     },
 
     update (dt) {
@@ -103,7 +106,7 @@ cc.Class({
         if( !this.player.getComponent("Player").nodamageFlag ){
             this.player.getComponent("Player").setblinkSec(3);
             let bar = this.playerHp.getComponent(cc.ProgressBar);
-            bar.progress -= 0.3;
+            bar.progress -= this.playerDmgRate;
             if( bar.progress <= 0 ){
                 cc.director.loadScene("end");
             }
@@ -111,13 +114,20 @@ cc.Class({
     },
 
     changeEnemyHp: function(delX){
-        if( !this.enemy.getComponent("Enemy").nodamageFlag ){
-            this.enemy.getComponent("Enemy").setblinkSec(3);
+        var enemy = this.enemy.getComponent("Enemy");
+        if( !enemy.nodamageFlag ){
+            enemy.setblinkSec(3);
             let bar = this.enemyHp.getComponent(cc.ProgressBar);
-            bar.progress -= 0.3 * (delX < this.enemyCriticalHitDistance ? 1:0.5);
+            bar.progress -= this.enemyDmgRate * (delX < this.enemyCriticalHitDistance ? 1:0.5);
             if( bar.progress <= 0 ){
                 Global.endIndex = 1;
                 cc.director.loadScene("end");
+            } else if ( bar.progress <= 0.5 && !this.powerUpFlag) {
+                cc.director.pause();
+                this.powerUpFlag = true;
+                enemy.moveSpeed *=2;
+                this.bulletCreatePeriod /=2;
+                this.bulletCreateCount = 0;
             }
         }
     }

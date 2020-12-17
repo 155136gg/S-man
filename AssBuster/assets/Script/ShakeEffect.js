@@ -24,10 +24,7 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-    },
-
-    onStartClick(){
-        cc.director.loadScene("intro");
+        shakeRadius:0
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -38,5 +35,12 @@ cc.Class({
 
     },
 
-    // update (dt) {},
+    update (dt) {
+        var randX = (Math.random() - 0.5) * this.shakeRadius * 2;
+        // 根据地平面位置和主角跳跃高度，随机得到一个星星的 y 坐标
+        var randY = (Math.random() - 0.5) * this.shakeRadius * 2;
+        // 根据屏幕宽度，随机得到一个星星 x 坐标
+        // 返回星星坐标
+        this.node.setPosition(cc.v2(randX, randY));
+    },
 });

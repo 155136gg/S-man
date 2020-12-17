@@ -41,7 +41,7 @@ cc.Class({
         this.directionType = {
             LEFT:-1, RIGHT:1
         }
-        this.direction = this.directionType.RIGHT * this.moveSpeed;
+        this.direction = this.directionType.RIGHT;
         this.nodamageFlag = false;
         this.blinkframe = 0;
     },
@@ -51,7 +51,7 @@ cc.Class({
     },
 
     update (dt) {
-        this.node.x += this.direction;
+        this.node.x += this.direction * this.moveSpeed;
         if( Math.abs(this.node.x) >= this.borderWidth ){
             this.direction *= -1;
         }

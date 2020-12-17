@@ -26,17 +26,42 @@ cc.Class({
         // },
         heightScale:0,
         widthScale:0,
-        content: {
+        contentBox: {
             default: null,
             type: cc.Node
         },
         contentScale:0,
     },
 
-    setContentText( text ){
+    setup( textArray, endProcess ){
+        this.contentAll = textArray;
+        this.contentAllIndex = 0;
+        this.endProcess = endProcess;
+        this.showContent(this.contentAll[this.contentAllIndex]);
+    },
+
+    showContent( text ){
         this.label.string = "";
-        this.contentText = text;
-        this.contentTextIndex = 0;
+        this.content = text;
+        this.contentIndex = 0;
+        this.contentAllIndex++;
+    },
+
+    onKeyDown (event) {
+        // set a flag when key pressed
+        switch(event.keyCode) {
+            case cc.macro.KEY.enter:
+            case cc.macro.KEY.space:
+                if( this.contentAllIndex < this.contentAll.length ){
+                    this.showContent(this.contentAll[this.contentAllIndex]);
+                } else {
+                    if(this.endProcess){
+                        this.endProcess();
+                    }
+                    this.node.destroy();
+                }
+                break;
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -46,22 +71,24 @@ cc.Class({
         this.node.width = this.node.parent.width * this.widthScale;
         this.node.x = 0;
         this.node.y = -0.4*this.node.parent.height + 0.5*this.node.height;
-        this.content.height = this.node.height * this.contentScale;
-        this.content.width = this.node.width * this.contentScale;
+        this.contentBox.height = this.node.height * this.contentScale;
+        this.contentBox.width = this.node.width * this.contentScale;
 
-        this.label = this.content.getComponent(cc.Label);
-        this.label.string = "";
-        this.contentText = "";
-        this.contentTextIndex = 0;
+        this.label = this.contentBox.getComponent(cc.Label);
+        this.contentAll = "";
+        this.contentAllIndex = 0;
+
+        // 初始化键盘输入监听
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
 
     start () {
     },
 
     update (dt) {
-        if( this.contentTextIndex < this.contentText.length ){
-            this.label.string = this.label.string.concat(this.contentText.charAt(this.contentTextIndex));
-            this.contentTextIndex++;
+        if( this.contentIndex < this.content.length ){
+            this.label.string = this.label.string.concat(this.content.charAt(this.contentIndex));
+            this.contentIndex++;
         }
     },
 });

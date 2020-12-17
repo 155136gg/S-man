@@ -230,7 +230,7 @@
     "_enabled": true,
     "heightScale": 0.2,
     "widthScale": 0.9,
-    "content": {
+    "contentBox": {
       "__id__": 2
     },
     "contentScale": 0.9,
