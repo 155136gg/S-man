@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        368.9268220121709,
+        377.5870760500153,
         0,
         0,
         0,
@@ -1309,6 +1309,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "textWindow": {
+      "__uuid__": "5e0a21df-894b-4f65-b416-2626d9c01fd8"
+    },
     "bullet": {
       "__uuid__": "0e8b341b-4cf0-4e45-9cd2-f454761fac59"
     },
@@ -1327,6 +1330,7 @@
       "__id__": 24
     },
     "enemyDmgRate": 0.3,
+    "enemyPowerUpRate": 0.5,
     "enemyHitDistance": 50,
     "enemyCriticalHitDistance": 20,
     "_id": "4ah4PLa9RGXo4Mlc67z1Vn"

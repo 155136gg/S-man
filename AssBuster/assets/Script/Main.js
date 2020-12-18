@@ -6,7 +6,10 @@
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
 window.Global = {
-    endIndex: 0
+    endIndex: 0,
+    enemyHp:1,
+    playerHp:1,
+    powerUpFlag:false
 };
 
 cc.Class({
@@ -28,6 +31,10 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        textWindow:{
+            default: null,
+            type: cc.Prefab
+        },
         bullet:{
             default: null,
             type: cc.Prefab
@@ -51,6 +58,7 @@ cc.Class({
             type: cc.Node
         },
         enemyDmgRate:0,
+        enemyPowerUpRate:0,
         enemyHitDistance:0,
         enemyCriticalHitDistance:0
     },
@@ -64,7 +72,13 @@ cc.Class({
     },
 
     start () {
-        this.powerUpFlag = false;
+        if (Global.powerUpFlag) {
+            this.enemyHp.getComponent(cc.ProgressBar).progress = Global.enemyHp;
+            this.playerHp.getComponent(cc.ProgressBar).progress = Global.playerHp;
+            this.enemy.getComponent("Enemy").moveSpeed *=2;
+            this.bulletCreatePeriod /=2;
+            this.bulletCreateCount = 0;
+        }
     },
 
     update (dt) {
@@ -83,6 +97,7 @@ cc.Class({
             var delX = Math.abs(this.enemy.x - this.player.x);
             this.changeEnemyHp(delX);
         }
+      
     },
 
     createBullet: function () {
@@ -122,12 +137,25 @@ cc.Class({
             if( bar.progress <= 0 ){
                 Global.endIndex = 1;
                 cc.director.loadScene("end");
-            } else if ( bar.progress <= 0.5 && !this.powerUpFlag) {
-                cc.director.pause();
-                this.powerUpFlag = true;
-                enemy.moveSpeed *=2;
-                this.bulletCreatePeriod /=2;
-                this.bulletCreateCount = 0;
+            } else if ( bar.progress <= this.enemyPowerUpRate && !Global.powerUpFlag) {
+                //this.node.emit("pause");
+                //this.node.dispatchEvent( new cc.Event.EventCustom('pause', true) );
+                /*
+                this.pauseFlag = true;
+                this.enemy.getComponent("Enemy").pauseFlag = true;
+                this.player.getComponent("Player").pauseFlag = true;
+                var children = this.node.children;
+                */
+
+                /*
+                this.myTextWindow = cc.instantiate(this.textWindow);
+                this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
+                var testStory = ["asdasd","qweqwe"];
+                this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {this.node.emit("resume");});
+                */
+                Global.enemyHp = bar.progress;
+                Global.powerUpFlag = true;
+                cc.director.loadScene("powerup");
             }
         }
     }
