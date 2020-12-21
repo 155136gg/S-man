@@ -37,7 +37,9 @@ cc.Class({
         this.contentAll = textArray;
         this.contentAllIndex = 0;
         this.endProcess = endProcess;
+        cc.log(textArray);
         this.showContent(this.contentAll[this.contentAllIndex]);
+        return this;
     },
 
     showContent( text ){

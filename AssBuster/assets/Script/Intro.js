@@ -27,36 +27,54 @@ cc.Class({
         textWindow:{
             default:null,
             type:cc.Prefab
-        }
-    },
-
-    onKeyDown (event) {
-        // set a flag when key pressed
-        switch(event.keyCode) {
-            case cc.macro.KEY.enter:
-            case cc.macro.KEY.space:
-                if( this.storyIndex < this.testStory.length ){
-                    this.myTextWindow.getComponent("TextWindow").setContentText(this.testStory[this.storyIndex]);
-                    this.storyIndex++;
-                } else {
-                    cc.director.loadScene("main");
-                }
-                break;
+        },
+        scene:{
+            default:null,
+            type:cc.Sprite
+        },
+        sceneSprite:{
+            default: null,
+            type: cc.SpriteFrame
         }
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        this.story1 = [
+            "「午間快訊，屎哥再度出沒，呼籲民眾減少開車外出，並錯開到公家機關辦事的時間...」",
+            "...",
+            "..."
+        ];
+        this.story2 = [
+            "轉眼間也已習武十余年，看來是時候派上用場了。",
+            "今天我就要制服暴徒，替　天　行　道　！"
+        ];
+        this.node.once("toSence2", ()=>{
+            this.myTextWindow = cc.instantiate(this.textWindow);
+            this.node.addChild(this.myTextWindow);
+            this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});
+        });
     },
 
     start () {
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
-        this.testStory = ["abc","def","ghi"];
-        this.myTextWindow.getComponent("TextWindow").setContentText(this.testStory[0]);
-        this.storyIndex = 1;
+
+        this.myTextWindow.getComponent("TextWindow")
+        .setup(this.story1, () => {
+            this.scene.spriteFrame = this.sceneSprite;
+            this.node.emit("toSence2");
+        });
+        /*cc.tween(this)
+        .call(() => { this.myTextWindow.getComponent("TextWindow").setup(this.story1, () => {this.scene.spriteFrame = this.sceneSprite;}); })
+        .call(() => { this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});})
+        .start()*/
+/*
+        const promise = new Promise((resolve)=>{resolve();});
+        promise
+        .then(()=>{this.myTextWindow.getComponent("TextWindow").setup(this.story1, () => {this.scene.spriteFrame = this.sceneSprite;});})
+        .then(()=>{this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});});*/
     },
 
     // update (dt) {},
