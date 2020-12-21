@@ -24,15 +24,43 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+        guide:{
+            default:null,
+            type: cc.Node
+        }
     },
 
     onStartClick(){
         cc.director.loadScene("intro");
     },
 
+    onGuideClick(){
+        this.guide.y = 0;
+    },
+
+    onKeyDown (event) {
+        // set a flag when key pressed
+        switch(event.keyCode) {
+            case cc.macro.KEY.a:
+            case cc.macro.KEY.left:
+            case cc.macro.KEY.d:
+            case cc.macro.KEY.right:
+            case cc.macro.KEY.enter:
+            case cc.macro.KEY.space:
+                this.guide.y = 600;
+                break;
+        }
+    },
+
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+
+        this.guide.on('touchstart', function (event) {
+            this.guide.y = 600;
+          }, this);
+    },
 
     start () {
 
