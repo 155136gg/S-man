@@ -78,20 +78,21 @@ cc.Class({
         this.node.x += this.direction * this.moveSpeed;
         if( Math.abs(this.node.x) >= this.borderWidth ){
             this.direction *= -1;
-            var frame = this.node.getComponent(cc.Sprite).spriteFrame;
+            //var frame = this.node.getComponent(cc.Sprite).spriteFrame;
+            cc.log(this.direction);
             switch(this.direction){
                 case this.directionType.RIGHT:
                     if(this.powerUpFalg){
-                        frame = this.powrupRight;
+                        this.node.getComponent(cc.Sprite).spriteFrame = this.powrupRight;
                     } else {
-                        frame = this.normalRight;
+                        this.node.getComponent(cc.Sprite).spriteFrame = this.normalRight;
                     }
                     break;
-                case this.direction.LEFT:
+                case this.directionType.LEFT:
                     if(this.powerUpFalg){
-                        frame = this.powerupLeft;
+                        this.node.getComponent(cc.Sprite).spriteFrame = this.powerupLeft;
                     } else {
-                        frame = this.normalLeft;
+                        this.node.getComponent(cc.Sprite).spriteFrame = this.normalLeft;
                     }
                     break;
             }
