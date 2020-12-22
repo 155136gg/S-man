@@ -25,6 +25,23 @@ cc.Class({
         //     }
         // },
         moveSpeed:0,
+        powerupRate:0,
+        normalRight:{
+            default:null,
+            type: cc.SpriteFrame
+        },
+        normalLeft:{
+            default:null,
+            type: cc.SpriteFrame
+        },
+        powrupRight:{
+            default:null,
+            type: cc.SpriteFrame
+        },
+        powerupLeft:{
+            default:null,
+            type: cc.SpriteFrame
+        },
     },
 
 
@@ -35,13 +52,20 @@ cc.Class({
             this.blinkcount = 0;
         }
     },
+
+    powerUp() {
+        this.moveSpeed *= this.powerupRate;
+        this.powerUpFalg = true;
+    },
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        cc.log("enemy onload is called");
         this.directionType = {
             LEFT:-1, RIGHT:1
         }
         this.direction = this.directionType.RIGHT;
+        this.node.getComponent(cc.Sprite).spriteFrame = this.normalRight;
         this.nodamageFlag = false;
         this.blinkframe = 0;
     },
@@ -54,6 +78,23 @@ cc.Class({
         this.node.x += this.direction * this.moveSpeed;
         if( Math.abs(this.node.x) >= this.borderWidth ){
             this.direction *= -1;
+            var frame = this.node.getComponent(cc.Sprite).spriteFrame;
+            switch(this.direction){
+                case this.directionType.RIGHT:
+                    if(this.powerUpFalg){
+                        frame = this.powrupRight;
+                    } else {
+                        frame = this.normalRight;
+                    }
+                    break;
+                case this.direction.LEFT:
+                    if(this.powerUpFalg){
+                        frame = this.powerupLeft;
+                    } else {
+                        frame = this.normalLeft;
+                    }
+                    break;
+            }
         }
 
         // If need blink

@@ -51,8 +51,6 @@ cc.Class({
             "今天我就要制服暴徒，替　天　行　道　！"
         ];
         this.node.once("toSence2", ()=>{
-            this.myTextWindow = cc.instantiate(this.textWindow);
-            this.node.addChild(this.myTextWindow);
             this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});
         });
     },
@@ -66,15 +64,6 @@ cc.Class({
             this.scene.spriteFrame = this.sceneSprite;
             this.node.emit("toSence2");
         });
-        /*cc.tween(this)
-        .call(() => { this.myTextWindow.getComponent("TextWindow").setup(this.story1, () => {this.scene.spriteFrame = this.sceneSprite;}); })
-        .call(() => { this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});})
-        .start()*/
-/*
-        const promise = new Promise((resolve)=>{resolve();});
-        promise
-        .then(()=>{this.myTextWindow.getComponent("TextWindow").setup(this.story1, () => {this.scene.spriteFrame = this.sceneSprite;});})
-        .then(()=>{this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});});*/
     },
 
     // update (dt) {},

@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        377.5870760500153,
+        374.1229744348775,
         0,
         0,
         0,
@@ -831,6 +831,19 @@
     },
     "_enabled": true,
     "moveSpeed": 10,
+    "powerupRate": 2,
+    "normalRight": {
+      "__uuid__": "97df3565-a5f3-43bb-8dda-506591af9347"
+    },
+    "normalLeft": {
+      "__uuid__": "e795baa1-a185-4681-b45c-be5e743f5f2e"
+    },
+    "powrupRight": {
+      "__uuid__": "20d9f331-8fc1-4f3b-8c01-885a70efae14"
+    },
+    "powerupLeft": {
+      "__uuid__": "126b08c8-b267-4e68-8171-135370f48a50"
+    },
     "_id": "dfiRSXoTRBYZGRaoin3cpK"
   },
   {

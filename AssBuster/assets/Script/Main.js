@@ -75,7 +75,7 @@ cc.Class({
         if (Global.powerUpFlag) {
             this.enemyHp.getComponent(cc.ProgressBar).progress = Global.enemyHp;
             this.playerHp.getComponent(cc.ProgressBar).progress = Global.playerHp;
-            this.enemy.getComponent("Enemy").moveSpeed *=2;
+            this.enemy.getComponent("Enemy").powerUp();
             this.bulletCreatePeriod /=2;
             this.bulletCreateCount = 0;
         }

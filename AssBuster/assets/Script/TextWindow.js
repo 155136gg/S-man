@@ -33,12 +33,12 @@ cc.Class({
         contentScale:0,
     },
 
-    setup( textArray, endProcess ){
+    setup( textArray, endProcess){
         this.contentAll = textArray;
         this.contentAllIndex = 0;
         this.endProcess = endProcess;
-        cc.log(textArray);
         this.showContent(this.contentAll[this.contentAllIndex]);
+        this.freezeFlag = false;
         return this;
     },
 
@@ -57,10 +57,10 @@ cc.Class({
                 if( this.contentAllIndex < this.contentAll.length ){
                     this.showContent(this.contentAll[this.contentAllIndex]);
                 } else {
-                    if(this.endProcess){
+                    if(this.endProcess && !this.freezeFlag){
+                        this.freezeFlag = true;
                         this.endProcess();
                     }
-                    this.node.destroy();
                 }
                 break;
         }
@@ -69,6 +69,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
+        cc.log("onLoad call");
         this.node.height = this.node.parent.height * this.heightScale;
         this.node.width = this.node.parent.width * this.widthScale;
         this.node.x = 0;
@@ -81,6 +82,7 @@ cc.Class({
         this.contentAllIndex = 0;
 
         // 初始化键盘输入监听
+        cc.log(this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
 
@@ -93,4 +95,8 @@ cc.Class({
             this.contentIndex++;
         }
     },
+
+    onDestroy () {
+        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+    }
 });

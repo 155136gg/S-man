@@ -27,18 +27,54 @@ cc.Class({
         textWindow:{
             default: null,
             type: cc.Prefab
+        },
+        background:{
+            default: null,
+            type: cc.Node
+        },
+        enemy:{
+            default: null,
+            type: cc.Node
+        },
+        powerupSprite:{
+            default: null,
+            type: cc.SpriteFrame
         }
+    },
+
+    onPowerup(){
+        cc.log(this.myTextWindow);
+        var testStory = ["qweqwe"];
+        //this.myTextWindow = cc.instantiate(this.textWindow);
+        //this.node.addChild(this.myTextWindow);
+        this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {
+            this.background.active = true;
+            cc.tween(this.enemy)
+            .blink(5,30, {easing:"quadIn"})
+            .call(()=>{ 
+                cc.log(this);
+                this.enemy.getComponent(cc.Sprite).spriteFrame = this.powerupSprite;
+            })
+            .delay(3)
+            .call(()=>{cc.director.loadScene("main");})
+            .start();
+        });
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    // onLoad () {},
+    onLoad () {
+        this.node.once("onPowerup",this.onPowerup, this);
+    },
 
     start () {
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
-        var testStory = ["asdasd","qweqwe"];
-        this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {cc.director.loadScene("main")});
+        var testStory = ["aaaaa","sdsdsdsd"];
+        this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {
+            //this.node.emit("onPowerup");
+            this.node.dispatchEvent( new cc.Event.EventCustom('onPowerup', true) )
+        });
     },
 
     // update (dt) {},
