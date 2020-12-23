@@ -69,7 +69,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.log("onLoad call");
         this.node.height = this.node.parent.height * this.heightScale;
         this.node.width = this.node.parent.width * this.widthScale;
         this.node.x = 0;

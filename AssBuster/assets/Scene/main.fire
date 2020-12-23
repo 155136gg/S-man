@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        358.5345171667576,
+        236.42493523315176,
         0,
         0,
         0,
@@ -266,7 +266,7 @@
         "__id__": 10
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 12
@@ -661,8 +661,8 @@
         0,
         0,
         1,
-        1.884,
-        1.884,
+        1,
+        1,
         1.884
       ]
     },
@@ -723,6 +723,12 @@
     "jumpDuration": 0.3,
     "maxMoveSpeed": 400,
     "accel": 1000,
+    "spriteA": {
+      "__uuid__": "88b3b5a4-9d85-4d28-8d14-f1ff6dae48fb"
+    },
+    "spriteB": {
+      "__uuid__": "b66b4c7c-2a01-4cd1-9cd2-ae94419839ae"
+    },
     "_id": "92oWDkM+xGR71PMJgZ1TrM"
   },
   {
@@ -993,7 +999,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
+      "__uuid__": "7f548c94-5c34-491e-9ece-a5b5f3fe023d"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1025,7 +1031,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "88e79fd5-96b4-4a77-a1f4-312467171014"
+      "__uuid__": "ffbf7445-5f30-4b5b-a636-25e6aa7736e1"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1205,7 +1211,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "67e68bc9-dad5-4ad9-a2d8-7e03d458e32f"
+      "__uuid__": "7f548c94-5c34-491e-9ece-a5b5f3fe023d"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1237,7 +1243,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "88e79fd5-96b4-4a77-a1f4-312467171014"
+      "__uuid__": "ffbf7445-5f30-4b5b-a636-25e6aa7736e1"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1341,6 +1347,9 @@
     "playerDmgRate": 0.3,
     "enemyHp": {
       "__id__": 24
+    },
+    "background": {
+      "__id__": 5
     },
     "enemyDmgRate": 0.3,
     "enemyPowerUpRate": 0.5,

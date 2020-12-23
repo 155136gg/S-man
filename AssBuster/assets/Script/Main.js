@@ -48,12 +48,16 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        playerHp:{//TODO
+        playerHp:{
             default: null,
             type: cc.Node
         },
         playerDmgRate:0,
-        enemyHp:{//TODO
+        enemyHp:{
+            default: null,
+            type: cc.Node
+        },
+        background:{
             default: null,
             type: cc.Node
         },
@@ -78,6 +82,8 @@ cc.Class({
             this.enemy.getComponent("Enemy").powerUp();
             this.bulletCreatePeriod /=2;
             this.bulletCreateCount = 0;
+            this.background.getComponent("Scroll").scrollSpeed *=2;
+            this.bullet.getComponent("Bullet").fallSpeed *=2;
         }
     },
 

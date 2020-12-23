@@ -11,14 +11,27 @@ cc.Class({
 		jumpHight:0,
         jumpDuration:0,
 		maxMoveSpeed:0,
-		accel:0
+        accel:0,
+        spriteA:{
+            default:null,
+            type: cc.SpriteFrame
+        },
+        spriteB:{
+            default:null,
+            type: cc.SpriteFrame
+        }
     },
 
     jumpAction: function(){
+        
         var up = cc.tween().by(this.jumpDuration, {y:this.jumpHight}, {easing:'sineOut'});
         var down = cc.tween().by(this.jumpDuration, {y:-this.jumpHight}, {easing:'sineIn'});
         //return cc.tween().repeatForever(cc.tween().sequence(up,down));
         return cc.tween().sequence(up,down);
+        /*return cc.tween()
+                .by(this.jumpDuration, {y:this.jumpHight}, {easing:'sineOut'})
+                .by(this.jumpDuration, {y:-this.jumpHight}, {easing:'sineIn'})
+                .start();*/
     },
 
     onKeyDown (event) {
@@ -88,6 +101,13 @@ cc.Class({
     },
 
     start(){
+        var playerAnimate = cc.tween()
+        .call( () => { this.node.getComponent(cc.Sprite).spriteFrame = this.spriteA; })
+        .delay(0.5)
+        .call( ()=>{this.node.getComponent(cc.Sprite).spriteFrame = this.spriteB;})
+        .delay(0.5);
+
+        cc.tween(this.node).repeatForever(playerAnimate).start();
     },
 
     // called every frame

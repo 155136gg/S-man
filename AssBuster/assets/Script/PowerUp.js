@@ -52,7 +52,6 @@ cc.Class({
             cc.tween(this.enemy)
             .blink(5,30, {easing:"quadIn"})
             .call(()=>{ 
-                cc.log(this);
                 this.enemy.getComponent(cc.Sprite).spriteFrame = this.powerupSprite;
             })
             .delay(3)
