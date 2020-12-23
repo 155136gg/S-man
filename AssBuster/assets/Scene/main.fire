@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        236.42493523315176,
+        357.6684917629732,
         0,
         0,
         0,
@@ -1334,7 +1334,7 @@
     "bullet": {
       "__uuid__": "0e8b341b-4cf0-4e45-9cd2-f454761fac59"
     },
-    "bulletCreatePeriod": 60,
+    "bulletCreatePeriod": 90,
     "player": {
       "__id__": 13
     },
@@ -1351,7 +1351,7 @@
     "background": {
       "__id__": 5
     },
-    "enemyDmgRate": 0.3,
+    "enemyDmgRate": 0.7,
     "enemyPowerUpRate": 0.5,
     "enemyHitDistance": 50,
     "enemyCriticalHitDistance": 20,

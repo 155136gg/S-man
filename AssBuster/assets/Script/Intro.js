@@ -28,30 +28,37 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
-        scene:{
+        backGround:{
             default:null,
             type:cc.Sprite
         },
-        sceneSprite:{
-            default: null,
-            type: cc.SpriteFrame
-        }
+        BgFrames: [cc.SpriteFrame]
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         this.story1 = [
-            "「午間快訊，屎哥再度出沒，呼籲民眾減少開車外出，並錯開到公家機關辦事的時間...」",
+            "「各位民眾請留意暴徒出沒，如有目擊可疑人士請速通知警方...」",
             "...",
-            "..."
+            "......"
         ];
         this.story2 = [
-            "轉眼間也已習武十余年，看來是時候派上用場了。",
-            "今天我就要制服暴徒，替　天　行　道　！"
+            "我這一身功夫，看來是時候派上用場了。",
+            "今天我就要制服暴徒，守護社會的和平！"
         ];
-        this.node.once("toSence2", ()=>{
-            this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {cc.director.loadScene("main");});
+        this.story3 = [
+            "我還以為會有更多人呢，憑你一人以為有辦法阻止我嗎?",
+            "就讓我來會會你吧!"
+        ];
+        this.node.once("toIntro2", ()=>{
+            this.myTextWindow.getComponent("TextWindow").setup(this.story2, () => {
+                this.backGround.spriteFrame = this.BgFrames[1];
+                this.node.emit("toIntro3");
+            });
+        });
+        this.node.once("toIntro3", ()=>{
+            this.myTextWindow.getComponent("TextWindow").setup(this.story3, () => {cc.director.loadScene("main");});
         });
     },
 
@@ -61,8 +68,8 @@ cc.Class({
 
         this.myTextWindow.getComponent("TextWindow")
         .setup(this.story1, () => {
-            this.scene.spriteFrame = this.sceneSprite;
-            this.node.emit("toSence2");
+            this.backGround.spriteFrame = this.BgFrames[0];
+            this.node.emit("toIntro2");
         });
     },
 

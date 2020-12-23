@@ -37,7 +37,6 @@ cc.Class({
     },
 
     update (dt) {
-        cc.log(dt);
         var y = this.node.y;
         y -= this.scrollSpeed;
         if (y <= this.resetY) {

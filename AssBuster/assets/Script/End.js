@@ -58,7 +58,7 @@ cc.Class({
         switch(Global.endIndex){
             case 0: //player lose
                 this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[2];
-                story = ["bbbbbbb","aaaaaa"];
+                story = ["....現在的你是沒法背負這一切的","重新來過吧!"];
                 nextProcess = () => {
                     this.resetGlobal();
                     cc.director.loadScene("start");
@@ -66,7 +66,7 @@ cc.Class({
                 break;
             case 1: //player win
                 this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[3];
-                story = ["ccccccc","ddddddd"];
+                story = [".....好!我等像你這樣身具勇氣與實力的人很久了","我的夢想就託付給你了"];
                 nextProcess = () => {
 
                     this.node.emit("thirdPart");
@@ -79,7 +79,7 @@ cc.Class({
 
     onThirdPart(){
         this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[4];
-        var story = ["dsssddsd"];
+        var story = ["用自己的〇喚醒沉睡的人們，讓他們發現被統治者掩蓋在虛假穩定下的真正惡臭吧!","永別了，兄弟!","...","......"];
 
         this.myTextWindow.getComponent("TextWindow").setup(story, () => {
             this.myTextWindow.destroy();
@@ -94,7 +94,10 @@ cc.Class({
     },
 
     onFourthPart(){
-        var story = ["eeeeeeeeeee"];
+        var story = [
+            "雖然不久前的暴徒在熱心民眾的協助下已被逮捕，近期又出現手法相似的暴徒。",
+            "不排除有非法組織的存在，國家不會容許破壞和平的分子存在!","......"
+        ];
 
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow);
@@ -105,7 +108,6 @@ cc.Class({
     },
 
     onLoad () {
-        Global.endIndex = 1;
         this.node.once("secPart",this.onSecPart, this);
         this.node.once("thirdPart",this.onThirdPart, this);
         this.node.once("fourthPart",this.onFourthPart, this);

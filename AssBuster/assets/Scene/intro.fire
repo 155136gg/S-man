@@ -174,7 +174,7 @@
       "array": [
         0,
         0,
-        374.1229744348775,
+        357.00544106320075,
         0,
         0,
         0,
@@ -235,7 +235,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "scene1",
+    "_name": "background",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -311,7 +311,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "2dfdb563-7743-4a06-a181-42657a590c25"
+      "__uuid__": "a71b1b24-294e-48e1-a2db-3beaf7a7392b"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -382,12 +382,17 @@
     "textWindow": {
       "__uuid__": "5e0a21df-894b-4f65-b416-2626d9c01fd8"
     },
-    "scene": {
+    "backGround": {
       "__id__": 6
     },
-    "sceneSprite": {
-      "__uuid__": "8571590a-758e-49d3-a142-550c1a855c3d"
-    },
+    "BgFrames": [
+      {
+        "__uuid__": "edf6c0b4-deef-4fe5-9ff2-fe4976d30ac3"
+      },
+      {
+        "__uuid__": "d98c2e72-ed06-425d-9fe4-1b93ec1ace4f"
+      }
+    ],
     "_id": "88uoJdEpBBEqgxXXpWT8It"
   }
 ]

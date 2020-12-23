@@ -44,7 +44,7 @@ cc.Class({
 
     onPowerup(){
         cc.log(this.myTextWindow);
-        var testStory = ["qweqwe"];
+        var testStory = ["喔喔喔喔喔喔!!!!!!"];
         //this.myTextWindow = cc.instantiate(this.textWindow);
         //this.node.addChild(this.myTextWindow);
         this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {
@@ -69,7 +69,7 @@ cc.Class({
     start () {
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
-        var testStory = ["aaaaa","sdsdsdsd"];
+        var testStory = ["沒想到你還挺行的，看來我也該拿出真本事啦!"];
         this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {
             //this.node.emit("onPowerup");
             this.node.dispatchEvent( new cc.Event.EventCustom('onPowerup', true) )
