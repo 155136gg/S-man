@@ -32,6 +32,10 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        backgroundSound:{
+            default: null,
+            type: cc.AudioClip
+        },
         enemy:{
             default: null,
             type: cc.Node
@@ -63,6 +67,7 @@ cc.Class({
 
     onLoad () {
         this.node.once("onPowerup",this.onPowerup, this);
+        this.bgmID = cc.audioEngine.play(this.backgroundSound, true, 1);
     },
 
     start () {
@@ -76,4 +81,8 @@ cc.Class({
     },
 
     // update (dt) {},
+
+    onDestroy: function () {
+        cc.audioEngine.stop(this.bgmID);
+    },
 });

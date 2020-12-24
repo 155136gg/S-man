@@ -40,6 +40,10 @@ cc.Class({
             type: cc.Prefab
         },
         bulletCreatePeriod:0,
+        bulletCreateSound:{
+            default: null,
+            type: cc.AudioClip
+        },
         player:{
             default: null,
             type: cc.Node
@@ -61,6 +65,14 @@ cc.Class({
             default: null,
             type: cc.Node
         },
+        backgroundSound:{
+            default: null,
+            type: cc.AudioClip
+        },
+        demageSound:{
+            default: null,
+            type: cc.AudioClip
+        },
         enemyDmgRate:0,
         enemyPowerUpRate:0,
         enemyHitDistance:0,
@@ -73,6 +85,7 @@ cc.Class({
         this.bulletPool = new cc.NodePool();
         this.bulletCreateCount = 0;
         this.enemy.getComponent('Enemy').main = this;
+        this.bgmID = cc.audioEngine.play(this.backgroundSound, true, 1);
     },
 
     start () {
@@ -108,6 +121,10 @@ cc.Class({
       
     },
 
+    onDestroy: function () {
+        cc.audioEngine.stop(this.bgmID);
+    },
+
     createBullet: function () {
         let bullet = null;
         if (this.bulletPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
@@ -118,6 +135,7 @@ cc.Class({
         }
         bullet.parent = this.node; // 将生成的敌人加入节点树
         bullet.setPosition(this.getNewBulletPosition());
+        cc.audioEngine.play(this.bulletCreateSound, false, 1);
         if( Global.powerUpFlag && this.newFallSpeed != bullet.getComponent('Bullet').fallSpeed){
             bullet.getComponent('Bullet').fallSpeed = this.newFallSpeed;
         }
@@ -142,6 +160,7 @@ cc.Class({
     changeEnemyHp: function(delX){
         var enemy = this.enemy.getComponent("Enemy");
         if( !enemy.nodamageFlag ){
+            cc.audioEngine.play(this.demageSound, false, 1);
             enemy.setblinkSec(3);
             let bar = this.enemyHp.getComponent(cc.ProgressBar);
             bar.progress -= this.enemyDmgRate * (delX < this.enemyCriticalHitDistance ? 1:0.5);

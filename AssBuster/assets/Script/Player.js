@@ -109,7 +109,6 @@ cc.Class({
 
     // called every frame
     update: function (dt) {
-        cc.log(dt);
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
             this.node.x -= this.speed * dt;

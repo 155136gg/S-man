@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        300.51081511320024,
+        357.6684917629732,
         0,
         0,
         0,
@@ -777,8 +777,8 @@
         0,
         0,
         1,
-        1,
-        1,
+        1.5,
+        1.5,
         2.587
       ]
     },
@@ -1334,6 +1334,9 @@
       "__uuid__": "0e8b341b-4cf0-4e45-9cd2-f454761fac59"
     },
     "bulletCreatePeriod": 90,
+    "bulletCreateSound": {
+      "__uuid__": "4a4623c0-3fdd-490e-b0e5-2b893b273d38"
+    },
     "player": {
       "__id__": 13
     },
@@ -1349,6 +1352,12 @@
     },
     "background": {
       "__id__": 5
+    },
+    "backgroundSound": {
+      "__uuid__": "9cfb5865-4545-490f-ae37-77a4ea71ae03"
+    },
+    "demageSound": {
+      "__uuid__": "51ec10be-d88b-43a3-8bf7-5568900f3434"
     },
     "enemyDmgRate": 0.3,
     "enemyPowerUpRate": 0.5,

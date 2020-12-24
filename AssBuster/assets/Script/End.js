@@ -40,6 +40,14 @@ cc.Class({
             default:null,
             type:cc.Prefab
         },
+        playerSound:{
+            default: null,
+            type: cc.AudioClip
+        },
+        enemySound:{
+            default: null,
+            type: cc.AudioClip
+        },
         BgFrames: [cc.SpriteFrame]
     },
 
@@ -134,21 +142,47 @@ cc.Class({
         this.node.once("fourthPart",this.onFourthPart, this);
     },
 
+    onSound( who ){
+        switch(who){
+            case 0://player
+                if( cc.audioEngine.getState(this.enemyID) != cc.audioEngine.AudioState.ERROR ){
+                    cc.audioEngine.stop(this.enemyID);
+                }
+                this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[0];
+                this.playerID = cc.audioEngine.play(this.playerSound, true, 1);
+                break;
+            case 1:
+                if( cc.audioEngine.getState(this.playerID) != cc.audioEngine.AudioState.ERROR ){
+                    cc.audioEngine.stop(this.playerID);
+                }
+                this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[1];
+                this.enemyID = cc.audioEngine.play(this.enemySound, true, 1);
+                break;
+        }
+    },
+
     start () {
+        this.playerID = null;
+        this.enemyID = null;
         cc.tween(this.backGround)
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[0];}).delay(2)
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[1];}).delay(2)
+        .call(()=>{this.onSound(0);}).delay(2)
+        .call(()=>{this.onSound(1);}).delay(2)
         .to(0, { scale: 2 })
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[0];}).delay(1)
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[1];}).delay(1)
+        .call(()=>{this.onSound(0);}).delay(1)
+        .call(()=>{this.onSound(1);}).delay(1)
         .to(0, { scale: 2.5 })
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[0];}).delay(0.5)
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[1];}).delay(0.5)
+        .call(()=>{this.onSound(0);}).delay(0.5)
+        .call(()=>{this.onSound(1);}).delay(0.5)
         .to(0, { scale: 3 })
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[0];}).delay(0.25)
-        .call(()=>{this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[1];}).delay(0.25)
+        .call(()=>{this.onSound(0);}).delay(0.25)
+        .call(()=>{this.onSound(1);}).delay(0.25)
         .to(0, { scale: 1 })
-        .call(()=>{this.backGround.getComponent("ShakeEffect").shakeRadius = 0;})
+        .call(()=>{
+            if( cc.audioEngine.getState(this.enemyID) != cc.audioEngine.AudioState.ERROR ){
+                cc.audioEngine.stop(this.enemyID);
+            }
+            this.backGround.getComponent("ShakeEffect").shakeRadius = 0;
+        })
         .call(()=>{this.node.emit("secPart");})
         .start();
     },

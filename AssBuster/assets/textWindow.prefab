@@ -230,10 +230,14 @@
     "_enabled": true,
     "heightScale": 0.2,
     "widthScale": 0.9,
+    "delay": 10,
     "contentBox": {
       "__id__": 2
     },
     "contentScale": 0.9,
+    "sound": {
+      "__uuid__": "6ae00545-1af4-4483-b088-ccfdf76f7c26"
+    },
     "_id": ""
   },
   {

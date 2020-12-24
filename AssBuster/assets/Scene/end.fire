@@ -180,7 +180,7 @@
       "array": [
         0,
         0,
-        300.51081511320024,
+        357.6684917629732,
         0,
         0,
         0,
@@ -488,7 +488,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 97.81,
+      "width": 111.11,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -622,6 +622,12 @@
     "textWindow": {
       "__uuid__": "5e0a21df-894b-4f65-b416-2626d9c01fd8"
     },
+    "playerSound": {
+      "__uuid__": "450dd8cc-3d23-498d-9483-be93f2069f29"
+    },
+    "enemySound": {
+      "__uuid__": "4a4623c0-3fdd-490e-b0e5-2b893b273d38"
+    },
     "BgFrames": [
       {
         "__uuid__": "437bc31c-58e6-4909-afdc-edd9ad001e85"
@@ -639,7 +645,7 @@
         "__uuid__": "be6c335b-685a-4b8b-a5d1-a51b1b282797"
       },
       {
-        "__uuid__": "410fb916-8721-4663-bab8-34397391ace7"
+        "__uuid__": "d813f80d-805d-417d-b535-acf5054abd92"
       }
     ],
     "_id": "a3S6HvlEZFvaxMBGWLyXcR"

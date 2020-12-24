@@ -26,11 +26,16 @@ cc.Class({
         // },
         heightScale:0,
         widthScale:0,
+        delay:0,
         contentBox: {
             default: null,
             type: cc.Node
         },
         contentScale:0,
+        sound:{
+            default: null,
+            type: cc.AudioClip
+        }
     },
 
     setup( textArray, endProcess){
@@ -43,10 +48,12 @@ cc.Class({
     },
 
     showContent( text ){
+        this.delayCount = 0;
         this.label.string = "";
         this.content = text;
         this.contentIndex = 0;
         this.contentAllIndex++;
+        this.current = cc.audioEngine.play(this.sound, true, 1);
     },
 
     onKeyDown (event) {
@@ -81,7 +88,6 @@ cc.Class({
         this.contentAllIndex = 0;
 
         // 初始化键盘输入监听
-        cc.log(this);
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     },
 
@@ -89,9 +95,18 @@ cc.Class({
     },
 
     update (dt) {
-        if( this.contentIndex < this.content.length ){
-            this.label.string = this.label.string.concat(this.content.charAt(this.contentIndex));
-            this.contentIndex++;
+        if( this.delayCount == this.delay ){
+            if( this.contentIndex < this.content.length ){
+             this.label.string = this.label.string.concat(this.content.charAt(this.contentIndex));
+                this.contentIndex++;
+            }
+        } else if (this.delay > 0){
+            this.delayCount++;
+        }
+        
+
+        if( this.contentIndex == this.content.length && this.contentIndex > 0 ){
+            cc.audioEngine.stopEffect(this.current);
         }
     },
 
