@@ -43,7 +43,6 @@ cc.Class({
     },
 
     onPowerup(){
-        cc.log(this.myTextWindow);
         var testStory = ["喔喔喔喔喔喔!!!!!!"];
         //this.myTextWindow = cc.instantiate(this.textWindow);
         //this.node.addChild(this.myTextWindow);

@@ -32,6 +32,10 @@ cc.Class({
             default:null,
             type:cc.Node
         },
+        endLogo:{
+            default:null,
+            type:cc.Node
+        },
         textWindow:{
             default:null,
             type:cc.Prefab
@@ -60,8 +64,10 @@ cc.Class({
                 this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[2];
                 story = ["....現在的你是沒法背負這一切的","重新來過吧!"];
                 nextProcess = () => {
-                    this.resetGlobal();
-                    cc.director.loadScene("start");
+                    this.myTextWindow.destroy();
+                    this.onFinish();
+                    //this.resetGlobal();
+                    //cc.director.loadScene("start");
                 };
                 break;
             case 1: //player win
@@ -85,7 +91,7 @@ cc.Class({
             this.myTextWindow.destroy();
             cc.tween(this.blackCover)
             .to(3,{opacity:255})
-            .call(() => { this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[5]; })
+            .call(() => { this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[5]; }) // TODO
             .delay(2)
             .to(3,{opacity:0})
             .call(() => {this.node.emit("fourthPart");})
@@ -102,9 +108,24 @@ cc.Class({
         this.myTextWindow = cc.instantiate(this.textWindow);
         this.node.addChild(this.myTextWindow);
         this.myTextWindow.getComponent("TextWindow").setup(story, () => {
-            this.resetGlobal();
-            cc.director.loadScene("start");
+            this.myTextWindow.destroy();
+            this.onFinish();
+            //this.resetGlobal();
+            //cc.director.loadScene("start");
         });
+    },
+
+    onFinish() {
+        cc.tween(this.endLogo)
+        .call(()=> {this.endLogo.getComponent(cc.Label).string = "END " + Global.endIndex;})
+        .to(2, {opacity:255})
+        .delay(3)
+        .to(2, {opacity:0})
+        .call(()=>{
+            this.resetGlobal();
+            cc.director.loadScene("finish");
+        })
+        .start();
     },
 
     onLoad () {
@@ -130,26 +151,6 @@ cc.Class({
         .call(()=>{this.backGround.getComponent("ShakeEffect").shakeRadius = 0;})
         .call(()=>{this.node.emit("secPart");})
         .start();
-
-/*
-        this.myTextWindow = cc.instantiate(this.textWindow);
-        this.node.addChild(this.myTextWindow);
-        switch(Global.endIndex){
-            case 0: //player lose
-                this.backGround.getComponent(cc.Sprite).spriteFrame = this.BgFrames[2];
-                this.end = ["bbbbbbb","aaaaaa"];
-                break;
-            case 1: //player win
-                this.end = ["ccccccc","ddddddd"];
-                break;
-        };
-
-        this.myTextWindow.getComponent("TextWindow").setup(this.end, () => {
-            this.resetGlobal();
-            cc.director.loadScene("start");
-        });
-
-        cc.tween(this.node).sequence(endFirst,).start();*/
     },
 
     // update (dt) {},

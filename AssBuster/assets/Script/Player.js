@@ -10,8 +10,7 @@ cc.Class({
         text: 'Hello, World!',*/
 		jumpHight:0,
         jumpDuration:0,
-		maxMoveSpeed:0,
-        accel:0,
+        speed:0,
         spriteA:{
             default:null,
             type: cc.SpriteFrame
@@ -89,8 +88,6 @@ cc.Class({
         // 加速度方向开关
         this.accLeft = false;
         this.accRight = false;
-        // 主角当前水平方向速度
-        this.xSpeed = 0;
 
         // 初始化键盘输入监听
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -112,22 +109,14 @@ cc.Class({
 
     // called every frame
     update: function (dt) {
+        cc.log(dt);
         // 根据当前加速度方向每帧更新速度
         if (this.accLeft) {
-            this.xSpeed -= this.accel * dt;
+            this.node.x -= this.speed * dt;
         }
         else if (this.accRight) {
-            this.xSpeed += this.accel * dt;
+            this.node.x += this.speed * dt;
         }
-
-        // 限制主角的速度不能超过最大值
-        if (Math.abs(this.xSpeed) > this.maxMoveSpeed) {
-            // if speed reach limit, use max speed with current direction
-            this.xSpeed = this.maxMoveSpeed * this.xSpeed / Math.abs(this.xSpeed);
-        }
-
-        // 根据当前速度更新主角的位置
-        this.node.x += this.xSpeed * dt;
 
         // If need blink
         if( this.blinkframe > 0 ){

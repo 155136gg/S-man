@@ -60,7 +60,6 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        cc.log("enemy onload is called");
         this.directionType = {
             LEFT:-1, RIGHT:1
         }
@@ -79,7 +78,6 @@ cc.Class({
         if( Math.abs(this.node.x) >= this.borderWidth ){
             this.direction *= -1;
             //var frame = this.node.getComponent(cc.Sprite).spriteFrame;
-            cc.log(this.direction);
             switch(this.direction){
                 case this.directionType.RIGHT:
                     if(this.powerUpFalg){

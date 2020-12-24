@@ -77,13 +77,15 @@ cc.Class({
 
     start () {
         if (Global.powerUpFlag) {
+            var tempBullet = null;
             this.enemyHp.getComponent(cc.ProgressBar).progress = Global.enemyHp;
             this.playerHp.getComponent(cc.ProgressBar).progress = Global.playerHp;
             this.enemy.getComponent("Enemy").powerUp();
             this.bulletCreatePeriod /=2;
             this.bulletCreateCount = 0;
             this.background.getComponent("Scroll").scrollSpeed *=2;
-            this.bullet.getComponent("Bullet").fallSpeed *=2;
+            tempBullet = cc.instantiate(this.bullet);
+            this.newFallSpeed = tempBullet.getComponent('Bullet').fallSpeed * 2;
         }
     },
 
@@ -116,6 +118,9 @@ cc.Class({
         }
         bullet.parent = this.node; // 将生成的敌人加入节点树
         bullet.setPosition(this.getNewBulletPosition());
+        if( Global.powerUpFlag && this.newFallSpeed != bullet.getComponent('Bullet').fallSpeed){
+            bullet.getComponent('Bullet').fallSpeed = this.newFallSpeed;
+        }
     },
 
     getNewBulletPosition: function () {
@@ -144,21 +149,6 @@ cc.Class({
                 Global.endIndex = 1;
                 cc.director.loadScene("end");
             } else if ( bar.progress <= this.enemyPowerUpRate && !Global.powerUpFlag) {
-                //this.node.emit("pause");
-                //this.node.dispatchEvent( new cc.Event.EventCustom('pause', true) );
-                /*
-                this.pauseFlag = true;
-                this.enemy.getComponent("Enemy").pauseFlag = true;
-                this.player.getComponent("Player").pauseFlag = true;
-                var children = this.node.children;
-                */
-
-                /*
-                this.myTextWindow = cc.instantiate(this.textWindow);
-                this.node.addChild(this.myTextWindow); // 将生成的敌人加入节点树
-                var testStory = ["asdasd","qweqwe"];
-                this.myTextWindow.getComponent("TextWindow").setup(testStory, () => {this.node.emit("resume");});
-                */
                 Global.enemyHp = bar.progress;
                 Global.powerUpFlag = true;
                 cc.director.loadScene("powerup");

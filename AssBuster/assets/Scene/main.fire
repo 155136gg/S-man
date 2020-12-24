@@ -188,7 +188,7 @@
       "array": [
         0,
         0,
-        357.6684917629732,
+        300.51081511320024,
         0,
         0,
         0,
@@ -295,8 +295,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -1.696,
-        -11.307,
+        0,
+        0,
         0,
         0,
         0,
@@ -357,8 +357,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        4.401,
-        1273.034,
+        0,
+        1280,
         0,
         0,
         0,
@@ -451,8 +451,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        2.872,
-        637.662,
+        0,
+        640,
         0,
         0,
         0,
@@ -611,7 +611,7 @@
     },
     "_enabled": true,
     "scrollSpeed": 10,
-    "resetY": -1200,
+    "resetY": -1280,
     "_id": "98FEfYF2RGTqINiA6hLbUn"
   },
   {
@@ -721,8 +721,7 @@
     "_enabled": true,
     "jumpHight": 400,
     "jumpDuration": 0.3,
-    "maxMoveSpeed": 400,
-    "accel": 1000,
+    "speed": 400,
     "spriteA": {
       "__uuid__": "88b3b5a4-9d85-4d28-8d14-f1ff6dae48fb"
     },
@@ -1351,7 +1350,7 @@
     "background": {
       "__id__": 5
     },
-    "enemyDmgRate": 0.7,
+    "enemyDmgRate": 0.3,
     "enemyPowerUpRate": 0.5,
     "enemyHitDistance": 50,
     "enemyCriticalHitDistance": 20,
